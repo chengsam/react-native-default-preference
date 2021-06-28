@@ -46,6 +46,17 @@ public class RNDefaultPreferenceModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getLong(String key, Promise promise) {
+    promise.resolve(String.valueOf(getPreferences().getLong(key, 0)));
+  }
+
+  @ReactMethod
+  public void setLong(String key, String value, Promise promise) {
+    getEditor().putLong(key, Long.parseLong(value)).commit();
+    promise.resolve(null);
+  }
+
+  @ReactMethod
   public void clear(String key, Promise promise) {
     getEditor().remove(key).commit();
     promise.resolve(null);
